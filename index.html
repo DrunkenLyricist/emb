@@ -88,11 +88,21 @@
     var watchUrl = document.getElementById("watch-url").value;
     var videoId;
     if (watchUrl.includes("youtube.com")) {
-        videoId = watchUrl.substring(watchUrl.indexOf("=") + 1);
+        if (watchUrl.includes("v=")) {
+            videoId = watchUrl.substring(watchUrl.indexOf("v=") + 2);
+        } else if (watchUrl.includes("embed/")) {
+            videoId = watchUrl.substring(watchUrl.indexOf("embed/") + 6);
+        } else if (watchUrl.includes("watch?v=")) {
+            videoId = watchUrl.substring(watchUrl.indexOf("watch?v=") + 8);
+        } else if (watchUrl.includes("live_stream?")) {
+            videoId = watchUrl.substring(watchUrl.indexOf("v=") + 2, watchUrl.indexOf("&"));
+        } else if (watchUrl.includes("/live/")) {
+            videoId = watchUrl.substring(watchUrl.lastIndexOf("/") + 1, watchUrl.indexOf("?"));
+        }
     } else if (watchUrl.includes("youtu.be")) {
         videoId = watchUrl.substring(watchUrl.lastIndexOf("/") + 1);
     }
-    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?o=U&noapp=1";
+    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?rel=0&autoplay=1&mute=0&showinfo=0&controls=1&o=U&noapp=1";
     document.getElementById("embed-link").href = embedUrl;
     document.getElementById("embed-link").innerHTML = embedUrl;
 }
