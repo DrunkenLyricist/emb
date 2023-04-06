@@ -73,7 +73,6 @@
 </head>
 <body>
     <header>
-        <a id="embed-link" href="https://www.youtube.com/embed/FP0wgVhUC9w?o=U&noapp=1">aaa</a>
         <h1>ad-free youtube url converter?</h1>
     </header>
     <form>
@@ -86,17 +85,18 @@
     <p><a id="embed-link" href=""></a></p>
     <script>
         function convert() {
-            var watchUrl = document.getElementById("watch-url").value;
-            var videoId;
-            if (watchUrl.includes("youtube.com")) {
-                videoId = watchUrl.substring(watchUrl.indexOf("=")+1);
-            } else if (watchUrl.includes("youtu.be")) {
-                videoId = watchUrl.substring(watchUrl.lastIndexOf("/")+1);
-            }
-            var embedUrl = "https://www.youtube.com/embed/" + videoId;
-            document.getElementById("embed-link").href = embedUrl;
-            document.getElementById("embed-link").innerHTML = embedUrl;
-        }
+    var watchUrl = document.getElementById("watch-url").value;
+    var videoId;
+    if (watchUrl.includes("youtube.com")) {
+        videoId = watchUrl.substring(watchUrl.indexOf("=") + 1);
+    } else if (watchUrl.includes("youtu.be")) {
+        videoId = watchUrl.substring(watchUrl.lastIndexOf("/") + 1);
+    }
+    var embedUrl = "https://www.youtube.com/embed/" + videoId + "?o=U&noapp=1";
+    document.getElementById("embed-link").href = embedUrl;
+    document.getElementById("embed-link").innerHTML = embedUrl;
+}
+
     </script>
 </body>
 </html>
